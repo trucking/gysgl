@@ -5,6 +5,7 @@
     include_once('./session.php');
     include_once('./class/database.class.php');
     include_once('./class/filter.class.php');
+    include_once('./class/supplier.class.php');
     $smarty = new Smarty();
     $smarty->template_dir       = './temp/';
     $smarty->compile_dir        = './temp_c/';

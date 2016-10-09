@@ -1,5 +1,5 @@
 {<include file="head.tpl">}
-<div class="title">今日提醒</div>
+<div class="title">供应商管理</div>
 
     {<if $content['list']>}
     <table class="rwtxList">
@@ -41,7 +41,8 @@
         页
     </p>
     {<else>}
-    <p>今天的事情都办完了，休息一下吧！</p>
+    <p>还没有供应商哦，是不是可以考虑加一个呢？</p>
+    <a href="supplierAdd.php">添加供应商</a>
     {</if>}
 </div>
 

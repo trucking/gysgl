@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="GB2312">
+</head>
+<body>
+你好，{<$content['username']>},欢迎使用本系统<br>
+<a href="http://localhost:2000/general/rwtx/index.php">今日提醒</a>
+<a href="http://localhost:2000/general/rwtx/missionAdd.php">提醒任务添加</a>
+<a href="http://localhost:2000/general/rwtx/logreview.php">维护日志查看</a><br>
+<script type="text/javascript" src= ./js/jquery-3.1.0.min.js></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("p").click(function(){
+            $(this).hide();
+        });
+    });
+</script>
+<p>this is a p div</p>
+    今日提醒<br>
+    {<if $content['list']>}
+    <table border = "3">
+        <tr>
+            <th>
+                任务编号
+            </th>
+            <th>
+                任务名称
+            </th>
+            <th>
+                任务类别
+            </th>
+            <th>
+                所属部门
+            </th>
+            <th>
+                上次维护时间
+            </th>
+            <th>
+                本次维护时间
+            </th>
+            <th>
+                维护周期
+            </th>
+            <th>
+                提醒时间
+            </th>
+            <th>
+                维护用品
+            </th>
+            <th>
+                备注
+            </th>
+            <th>操作</th>
+        </tr>
+    {<foreach $content['list'] as $key=>$item>}
+        <tr>
+            <td>
+                {<$item['mission_no']>}
+            </td>
+            <td>
+                {<$item['mission_name']>}
+            </td>
+            <td>
+                {<$item['mission_type']>}
+            </td>
+            <td>
+                {<$item['mission_project']>}
+            </td>
+            <td>
+                {<$item['mission_lasttime']>}
+            </td>
+            <td>
+                {<$item['mission_thistime']>}
+            </td>
+            <td>
+                {<$item['mission_cycle']>}
+            </td>
+            <td>
+                {<$item['mission_remindtime']>}
+            </td>
+            <td>
+                {<$item['mission_goodsname']>}
+            </td>
+            <td>
+                {<$item['mission_remark']>}
+            </td>
+            <td>
+                <a href="http://localhost:2000/general/rwtx/whrz.php?mission_sysno={<$item['mission_sysno']>}">维护</a>
+            </td>
+        </tr>
+    {</foreach>}
+    </table>
+    {<else>}
+    <p>今天的事情都办完了，休息一下吧！</p>
+    {</if>}
+</body>
+</html>

@@ -1,0 +1,113 @@
+.naviga
+{
+    display: block;
+}
+.naviga ul
+{
+    list-style-type:none;
+    margin:0;
+    padding:0;
+
+}
+.naviga li
+{
+    float: left;
+}
+.naviga a:link,.naviga a:visited
+{
+    display:block;
+    width:150px;
+    color:#FFFFFF;
+    background-color:#0e3c76;
+    text-align:center;
+    padding:4px;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size: 18px;
+}
+.naviga a:hover,.naviga a:active
+{
+    background-color:#179bdd;
+    color: #ffffff;
+}
+.content
+{
+    display: block;
+    border: 1px solid green;
+}
+
+.clear
+{
+    clear: both;
+}
+.title
+{
+    font-size: 18px;
+    font-weight: 700;
+    margin: 20px;
+
+}
+.rwtxList
+{
+    font-size: 13px;
+    border: 1px solid cornflowerblue;
+    text-align: center;
+    width:95%;
+    margin-left: 2%;
+
+}
+.rwtxList th
+{
+    background-color: cornflowerblue;
+    color: white;
+    border: 1px solid black;
+}
+.rwtxList td
+{
+    border: 1px solid cornflowerblue;
+}
+.rwtxList tr td a
+{
+    FONT-SIZE: 9pt;
+    height: 20px;
+    text-decoration: none;
+    vertical-align: middle;
+    border: 1px solid #6E91C7;
+    background: #F4FBE1 url('./temp/button_bg.gif');
+}
+.rwtxList tr td a:hover
+{
+    FONT-SIZE: 9pt;
+    color: #395500;
+    background: #F4FADF url('./temp/bg_input_btn_hover.png');
+    border: 1px solid #80AA00;
+    border-top: 1px solid #99CC00;
+    border-left: 1px solid #99CC00;
+}
+.trGreen
+{
+    background-color:mediumseagreen;
+    border: 1px solid white;
+}
+.trYellow
+{
+    background-color:darkkhaki;
+    border: 1px solid white;
+}
+.trRed
+{
+    background-color: darksalmon;
+    border: 1px solid white;
+}
+.trGreen td
+{
+    border: 1px solid white;
+}
+.trYellow td
+{
+    border: 1px solid white;
+}
+.trRed td
+{
+    border: 1px solid white;
+}

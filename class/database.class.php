@@ -8,6 +8,7 @@
 
 class Database {
 
+    private static $sql = '';
     private static function conn()
     {
         $server = '127.0.0.1';
@@ -23,7 +24,7 @@ class Database {
     {
         $line = 0;
 
-        while($arr[$line] = mysql_fetch_array($obj))
+        while($arr[$line] = mysql_fetch_assoc($obj))
         {
             $line++;
         }
@@ -31,19 +32,35 @@ class Database {
         array_pop($arr);
         return $arr;
     }
+
     public static function select($item,$table,$condition=NULL)
     {
         if(empty($condition))
         {
-            $sql = 'select '.$item.' from '.$table;
+            self::$sql = 'select '.$item.' from '.$table;
         }else{
-            $sql = 'select '.$item.' from '.$table.' where '.$condition;
+            self::$sql = 'select '.$item.' from '.$table.' where '.$condition;
         }
         $conn = self::conn();
-        $objResult = mysql_query($sql,$conn);
+        $objResult = mysql_query(self::$sql,$conn);
 
         return $result = self::objToArr($objResult);
     }
+
+    public static function selectOne($item,$table,$condition=NULL)
+    {
+        if(empty($condition))
+        {
+            self::$sql = 'select '.$item.' from '.$table;
+        }else{
+            self::$sql = 'select '.$item.' from '.$table.' where '.$condition;
+        }
+        $conn = self::conn();
+        $objResult = mysql_query(self::$sql,$conn);
+        $result = mysql_fetch_array($objResult);
+        return $result[0][0];
+    }
+
     public static function insert($table,$value)
     {
         $item = '';
@@ -62,28 +79,30 @@ class Database {
         //去除末尾逗号
         $item = rtrim($item,',');
         $value1 = rtrim($value1,',');
-        $sql = 'insert into '.$table.'('.$item.') values('.$value1.')';
+        self::$sql = 'insert into '.$table.'('.$item.') values('.$value1.')';
         $conn = self::conn();
-        $result = mysql_query($sql,$conn);
+        $result = mysql_query(self::$sql,$conn);
 
         if($result == false){
-            throw new Exception("数据添加有误！");
+            throw new Exception("数据添加有误!");
         }
+
         return $result;
     }
+
     public static function update($table,$item,$condition)
     {
-        $sql = 'update '.$table.' set ';
+        self::$sql = 'update '.$table.' set ';
         //item采用数组形式，项目名为数组键名，值为数组键值
         if(is_array($item))
         {
             foreach($item as $key=>$val)
             {
-                $sql .= $key.'=\''.$val.'\',';
+                self::$sql .= $key.'=\''.$val.'\',';
             }
             //去掉末尾的逗号
-            $sql = rtrim($sql,',');
-            $sql .= 'where '.$condition;
+            self::$sql = rtrim($sql,',');
+            self::$sql .= 'where '.$condition;
         }else
         {
             throw new Exception('参数错误，不是数组');
@@ -96,9 +115,10 @@ class Database {
         }
         return $result;
     }
+
     public static function delete($table,$condition)
     {
-        $sql = 'delete from '.$table.' where '.$condition;
+        self::$sql = 'delete from '.$table.' where '.$condition;
         $conn = self::conn();
         $result = mysql_query($sql,$conn);
         if($result == false)
@@ -107,9 +127,10 @@ class Database {
         }
         return $result;
     }
+
     public static function showItem($table)
     {
-        $sql = 'show columns from '.$table;
+        self::$sql = 'show columns from '.$table;
         $conn =self::conn();
         $objResult = mysql_query($sql,$conn);
         $result= self::objToArr($objResult);
@@ -121,5 +142,10 @@ class Database {
             $i++;
         }
         return $arr;
+    }
+
+    public static function echoSql()
+    {
+        echo self::$sql;
     }
 }

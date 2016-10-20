@@ -8,6 +8,8 @@
 include_once('database.class.php');
 
 class supplier {
+    private $type = array('1'=>'包材供应商','2'=>'原料供应商');
+    private $type2 = array('1'=>'生产商','2'=>'中间商');
     private $supplierId;
     private $supplierUid;
     private $supplierName;
@@ -16,21 +18,38 @@ class supplier {
     private $supplierGoods;
     private $supplierCerId;
     private $supplierIsAble;
+    public $midNum;
+    public $proNum;
+    public $ylNum;
+    public $bcNum;
 
     function __construct()
     {
-
+        $item = 'count(\'id\')';
+        $condition = 'isable = 1 and type2 = 2';
+        $result = Database::select($item,'gysgl_supplier',$condition);
+        $this->midNum = $result[0]['count(\'id\')'];
+        $condition = 'isable = 1 and type2 = 1';
+        $result = Database::select($item,'gysgl_supplier',$condition);
+        $this->proNum = $result[0]['count(\'id\')'];
+        $condition = 'isable = 1 and type = 1';
+        $result = Database::select($item,'gysgl_supplier',$condition);
+        $this->bcNum = $result[0]['count(\'id\')'];
+        $condition = 'isable = 1 and type = 2';
+        $result = Database::select($item,'gysgl_supplier',$condition);
+        $this->ylNum = $result[0]['count(\'id\')'];
     }
 
-    public function addSupplier($uid,$name,$type,$address = '',$goods,$cerId='',$isAble = 1)
+    public function addSupplier($uid,$name,$type,$type2,$address = '',$goods,$remark='',$isAble = 1)
     {
         $arr['uid']     = $uid ;
         $arr['name']    = $name;
         $arr['type']    = $type;
+        $arr['type2']   = $type2;
         $arr['address'] = $address;
         $arr['goods']   = $goods;
-        $arr['cerId']   = $cerId;
-        $arr['isAble']  = $isAble;
+        $arr['remark']  = $remark;
+        $arr['isable']  = $isAble;
         return Database::insert('gysgl_supplier',$arr);
     }
 
@@ -43,10 +62,10 @@ class supplier {
 
     public function getSupplierIdByUid($uid)
     {
-        $condition = 'uid = '.$uid;
+        $condition = 'uid = \''.$uid.'\'';
         $id = Database::select('id','gysgl_supplier',$condition);
-        $this->$supplierId = $id;
-        return $id;
+        $this->supplierId = $id[0]['id'];
+        return $id[0]['id'];
     }
 
     public function getSupplierIdByName($name)
@@ -57,10 +76,79 @@ class supplier {
         return $id;
     }
 
+    public function getSupplierNameById($id)
+    {
+        $condition = 'id ='.$id;
+        $name = Database::select('name','gysgl_supplier',$condition);
+        return $this->supplierName = $name[0]['name'];
+    }
+
+    public function getSupplierUidById($id)
+    {
+        $condition = 'id ='.$id;
+        $name = Database::select('uid','gysgl_supplier',$condition);
+        return $this->supplierName = $name[0]['uid'];
+    }
+
     public function getSupplierList()
     {
-        $item = 'uid,name,type,address,goods,certification';
-        $condition = 'isable = 0';
-        return Database::select($item,'gysgl_supplier',$condition);
+        $item = 'id,uid,name,type,type2,address,goods';
+        $condition = 'isable = 1';
+        $result = Database::select($item,'gysgl_supplier',$condition);
+        foreach($result as $k=>$v)
+        {
+            foreach($v as $key=>$val)
+            {
+                if($key == 'type')
+                {
+                    $result[$k]['type'] = $this->typeNumToType($val);
+                }
+                if($key == 'type2')
+                {
+                    $result[$k]['type2'] = $this->type2NumToType($val);
+                }
+            }
+        }
+
+        return $result;
+
+    }
+
+    public function getAllType()
+    {
+        $type = $this->type;
+        return $type;
+    }
+
+    public function getAllType2()
+    {
+        $type = $this->type2;
+        return $type;
+    }
+
+    public function typeNumToType($num)
+    {
+        $arr = $this->type;
+        foreach($arr as $k=>$v)
+        {
+            if($num == $k)
+            {
+                $type = $v;
+            }
+        }
+        return $type;
+    }
+
+    public function type2NumToType($num)
+    {
+        $arr = $this->type2;
+        foreach($arr as $k=>$v)
+        {
+            if($num == $k)
+            {
+                $type = $v;
+            }
+        }
+        return $type;
     }
 } 

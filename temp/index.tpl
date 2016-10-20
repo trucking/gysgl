@@ -1,35 +1,32 @@
 {<include file="head.tpl">}
-<div class="title">供应商管理</div>
-
+<div class="title">供应商列表</div>
+    <p>
+        中间商：{<$content['midNum']>}&nbsp;家
+        生产商：{<$content['proNum']>}&nbsp;家
+        包材供应商：{<$content['bcNum']>}&nbsp;家
+        原料供应商：{<$content['ylNum']>}&nbsp;家
+    </p>
     {<if $content['list']>}
     <table class="rwtxList">
         <tr>
-            <th>任务编号</th>
-            <th>任务名称</th>
-            <th>任务类别</th>
-            <th>所属部门</th>
-            <th>上次维护时间</th>
-            <th>本次维护时间</th>
-            <th>维护周期</th>
-            <th>提醒时间</th>
-            <th>维护用品</th>
-            <th>备注</th>
+            <th>编号</th>
+            <th>名称</th>
+            <th>类别</th>
+            <th>类别2</th>
+            <th>地址</th>
+            <th>所购物品</th>
             <th>操作</th>
         </tr>
     {<foreach $content['list'] as $key=>$item>}
         <tr>
-            <td>{<$item['mission_no']>}</td>
-            <td>{<$item['mission_name']>}</td>
-            <td>{<$item['mission_type']>}</td>
-            <td>{<$content['deptName']>}</td>
-            <td>{<$item['mission_lasttime']>}</td>
-            <td>{<$item['mission_thistime']>}</td>
-            <td>{<$item['mission_cycle']>}天</td>
-            <td>{<$item['mission_remindtime']>}</td>
-            <td>{<$item['mission_goodsname']>}</td>
-            <td>{<$item['mission_remark']>}</td>
+            <td>{<$item['uid']>}</td>
+            <td>{<$item['name']>}</td>
+            <td>{<$item['type']>}</td>
+            <td>{<$item['type2']>}</td>
+            <td>{<$item['address']>}</td>
+            <td>{<$item['goods']>}</td>
             <td style="width: 40px;">
-                <a href="whrz.php?mission_sysno={<$item['mission_sysno']>}" onclick="window.location.reload()">维护</a>
+                <a href="supplierChange.php?id={<$item['id']>}">修改</a>
             </td>
         </tr>
     {</foreach>}

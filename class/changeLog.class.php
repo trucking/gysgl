@@ -25,7 +25,7 @@ class changeLog {
             $this->type         = $arr['type'];
             $this->supplier     = $arr['supplier'];
             $this->certificate  = $arr['certificate'];
-            $this->dueDate      = $arr['dateDate'];
+            $this->dueDate      = $arr['newTime'];
             $this->chageLogInfo = $arr;
         }
     }

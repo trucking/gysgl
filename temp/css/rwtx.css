@@ -34,6 +34,7 @@
 {
     display: block;
     border: 1px solid green;
+    height: 2px;
 }
 
 .clear
@@ -45,8 +46,8 @@
     font-size: 18px;
     font-weight: 700;
     margin: 20px;
-
 }
+
 .rwtxList
 {
     font-size: 13px;
@@ -111,3 +112,103 @@
 {
     border: 1px solid white;
 }
+.tanchu
+{
+    position: absolute;
+    left: 30%;
+    top: 5%;
+    width: 40%;
+    height: 85%;
+    background-color: cornflowerblue;
+    filter:alpha(opacity=80);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.tanchu .supName
+{
+    position: relative;
+    left: 20%;
+    top: 10%;
+    color: white;
+}
+
+.tanchu .cerName
+{
+    position: relative;
+    left: 20%;
+    top: 20%;
+    color: white;
+}
+
+.tanchu .dueTime
+{
+    position: relative;
+    left: 20%;
+    top: 30%;
+    color: white;
+}
+
+.tanchu .newTime
+{
+    position: relative;
+    left: 20%;
+    top: 40%;
+    color: white;
+}
+
+.tanchu .close
+{
+    position: absolute;
+    top: 40%;
+}
+
+.tanchu .msg
+{
+    position: relative;
+    left: 20%;
+    top: 50%;
+    width: 50%;
+    color: white;
+}
+.user
+{
+    display: none;
+}
+
+.titlebar
+{
+    background-color: #179bdd;
+    color: white;
+    font-size: 18px;
+    font-weight: 800;
+    height: 5px;
+    margin-top: 10px;
+    width: 98%;
+    margin-left: 2%;
+}
+
+.titlebar .title
+{
+    margin: 10px;
+    top: 1px;
+    height: 5px;
+    width: 85%;
+}
+#exitSup
+{
+    background-color: coral;
+}
+#freezeSup
+{
+    background-color: lightcyan;
+    color: #179bdd;
+}
+.titlebar .shouqi
+{
+    width: 5%;
+    position: absolute;
+    top :120px;
+    left: 90%;
+}
+

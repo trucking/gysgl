@@ -101,14 +101,14 @@ class Database {
                 self::$sql .= $key.'=\''.$val.'\',';
             }
             //去掉末尾的逗号
-            self::$sql = rtrim($sql,',');
-            self::$sql .= 'where '.$condition;
+            self::$sql = rtrim(self::$sql,',');
+            self::$sql .= ' where '.$condition;
         }else
         {
             throw new Exception('参数错误，不是数组');
         }
         $conn = self::conn();
-        $result = mysql_query($sql,$conn);
+        $result = mysql_query(self::$sql,$conn);
         if($result == false)
         {
             throw new Exception('更新出错');

@@ -8,6 +8,7 @@
     include_once('./class/supplier.class.php');
     include_once('./class/certification.class.php');
     include_once('./class/user.class.php');
+    include_once('./class/changeLog.class.php');
     $smarty = new Smarty();
     $smarty->template_dir       = './temp/';
     $smarty->compile_dir        = './temp_c/';

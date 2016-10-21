@@ -48,4 +48,21 @@ class certification {
         return $arr;
     }
 
+    public function updateDueTime($id,$newTime)
+    {
+        $item['due_time'] = $newTime;
+        $item['update_time'] = date('Y-m-d');
+        $condition = 'id = '.$id;
+        $result = Database::update('gysgl_sutoce',$item,$condition);
+
+        return $result;
+    }
+
+    public function getInfoById($id)
+    {
+        $item = '*';
+        $table = 'gysgl_sutoce';
+        $condition = 'id = '.$id;
+        return Database::select($item,$table,$condition);
+    }
 } 

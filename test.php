@@ -37,7 +37,4 @@ $obj = mysql_query($sql,$conn);
 $result = mysql_fetch_array($obj);
 var_dump($result);*/
 include_once('inc.php');
-$obj = new user();
-
-print_r($obj->getNameById('admin'));
-Database::echoSql();
+echo date('Y-m-d');

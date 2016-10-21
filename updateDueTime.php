@@ -7,7 +7,7 @@
  */
 try{
     include_once('./incNoAuth.php');
-//header("Content-type: text/json; charset=gb2312");
+    header("Content-type: text/json; charset=gb2312");
 
     $arr['newTime'] = trim($_POST['newTime']);
     $arr['id'] = trim($_POST['id']);

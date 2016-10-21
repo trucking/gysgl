@@ -33,7 +33,7 @@ $(".update").click(function(){
             user:$user
         },
         function(data){
-            alert(data);
+            //alert(data);
             if(data.result == 1){
                 $(".msg").text("更新成功").show();
             }else{

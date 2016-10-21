@@ -10,6 +10,7 @@ include_once('database.class.php');
 class supplier {
     private $type = array('1'=>'包材供应商','2'=>'原料供应商');
     private $type2 = array('1'=>'生产商','2'=>'中间商');
+    private $isAble = array(1=>'正常','2'=>'冻结','0'=>'退出');
     private $supplierId;
     private $supplierUid;
     private $supplierName;
@@ -53,9 +54,23 @@ class supplier {
         return Database::insert('gysgl_supplier',$arr);
     }
 
-    public function unableSupplier($id)
+    public function tcSupplier($id)
     {
         $item['isable'] = 0;
+        $condition = 'id = '.$id;
+        return Database::update('gysgl_supplier',$item,$condition);
+    }
+
+    public function djSupplier($id)
+    {
+        $item['isable'] = 2;
+        $condition = 'id = '.$id;
+        return Database::update('gysgl_supplier',$item,$condition);
+    }
+
+    public function reSupplier($id)
+    {
+        $item['isable'] = 1;
         $condition = 'id = '.$id;
         return Database::update('gysgl_supplier',$item,$condition);
     }
@@ -70,9 +85,9 @@ class supplier {
 
     public function getSupplierIdByName($name)
     {
-        $condition = 'name = '.$name;
+        $condition = 'name = \''.$name.'\'';
         $id = Database::select('id','gysgl_supplier',$condition);
-        $this->$supplierId = $id;
+        $this->supplierId = $id;
         return $id;
     }
 
@@ -94,6 +109,54 @@ class supplier {
     {
         $item = 'id,uid,name,type,type2,address,goods';
         $condition = 'isable = 1';
+        $result = Database::select($item,'gysgl_supplier',$condition);
+        foreach($result as $k=>$v)
+        {
+            foreach($v as $key=>$val)
+            {
+                if($key == 'type')
+                {
+                    $result[$k]['type'] = $this->typeNumToType($val);
+                }
+                if($key == 'type2')
+                {
+                    $result[$k]['type2'] = $this->type2NumToType($val);
+                }
+            }
+        }
+
+        return $result;
+
+    }
+
+    public function getSupplierListOfFz()
+    {
+        $item = 'id,uid,name,type,type2,address,goods';
+        $condition = 'isable = 2';
+        $result = Database::select($item,'gysgl_supplier',$condition);
+        foreach($result as $k=>$v)
+        {
+            foreach($v as $key=>$val)
+            {
+                if($key == 'type')
+                {
+                    $result[$k]['type'] = $this->typeNumToType($val);
+                }
+                if($key == 'type2')
+                {
+                    $result[$k]['type2'] = $this->type2NumToType($val);
+                }
+            }
+        }
+
+        return $result;
+
+    }
+
+    public function getSupplierListEx()
+    {
+        $item = 'id,uid,name,type,type2,address,goods';
+        $condition = 'isable = 0';
         $result = Database::select($item,'gysgl_supplier',$condition);
         foreach($result as $k=>$v)
         {
@@ -150,5 +213,13 @@ class supplier {
             }
         }
         return $type;
+    }
+
+    public function getSupplierInfo($id)
+    {
+        $item = '*';
+        $table = 'gysgl_supplier';
+        $condition = 'id = '.$id;
+        return Database::select($item,$table,$condition);
     }
 } 

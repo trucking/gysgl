@@ -120,7 +120,7 @@ class Database {
     {
         self::$sql = 'delete from '.$table.' where '.$condition;
         $conn = self::conn();
-        $result = mysql_query($sql,$conn);
+        $result = mysql_query(self::$sql,$conn);
         if($result == false)
         {
             throw new Exception('É¾³ý³ö´í');
@@ -132,7 +132,7 @@ class Database {
     {
         self::$sql = 'show columns from '.$table;
         $conn =self::conn();
-        $objResult = mysql_query($sql,$conn);
+        $objResult = mysql_query(self::$sql,$conn);
         $result= self::objToArr($objResult);
         //print_r($result);
         $i = 0;

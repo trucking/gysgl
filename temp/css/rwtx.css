@@ -211,4 +211,30 @@
     top :120px;
     left: 90%;
 }
+.info
+{
+    margin-left: 10px;
+    margin-top: 10px;
+    width:60%;
+    display: inline;
+
+}
+
+.infoTitle
+{
+    display: inline;
+    width:15%;
+
+}
+.infoContent
+{
+    display: inline;
+
+}
+.state
+{
+    width:10%;
+    display: inline;
+    margin-left: 100px;
+}
 

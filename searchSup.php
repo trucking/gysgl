@@ -6,7 +6,7 @@
  * Time: 下午7:19
  */
 include_once ('./incNoAuth.php');
-header("Content-type: text/json ; charset=GB2312");
+header("Content-type: text/json ; charset=utf-8");
 $supName = '大同李氏包材厂';//trim($_POST['sup']);
 $obj = new supplier();
 $id = 2;//$obj->getSupplierIdByName($supName);
@@ -16,9 +16,9 @@ if(empty($id)){
     exit;
 }
 $result = $obj->getSupplierInfo($id);
-var_dump($result);
+//var_dump($result);
 if(empty($result)){
     $result = 0;
 }
-var_dump($result);
+$result = array('test'=>'中文','date'=>1);
 echo json_encode($result);

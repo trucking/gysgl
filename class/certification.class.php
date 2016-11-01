@@ -65,4 +65,10 @@ class certification {
         $condition = 'id = '.$id;
         return Database::select($item,$table,$condition);
     }
+
+    public function getListBysupId($id)
+    {
+        $condition = 'supplier_id = '.$id;
+        return Database::select('*','gysgl_sutoce',$condition);
+    }
 } 

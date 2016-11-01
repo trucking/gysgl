@@ -6,6 +6,7 @@
  * Time: 下午1:55
  */
 include_once('database.class.php');
+include_once('certificate.class.php');
 
 class supplier {
     private $type = array('1'=>'包材供应商','2'=>'原料供应商');
@@ -88,7 +89,7 @@ class supplier {
         $condition = 'name = \''.$name.'\'';
         $id = Database::select('id','gysgl_supplier',$condition);
         $this->supplierId = $id;
-        return $id;
+        return $id[0]['id'];
     }
 
     public function getSupplierNameById($id)
@@ -220,6 +221,11 @@ class supplier {
         $item = '*';
         $table = 'gysgl_supplier';
         $condition = 'id = '.$id;
-        return Database::select($item,$table,$condition);
+        $result = Database::select($item,$table,$condition);
+        $result[0]['type'] = $this->typeNumToType($result[0]['type']);
+        $result[0]['type2'] = $this->type2NumToType($result[0]['type2']);
+        $cerObj = new certification();
+        $result[0]['cer'] = $cerObj->getListBysupId($id);
+        return $result[0];
     }
 } 

@@ -2,7 +2,7 @@
 <div class="search">
     <div>供应商名称：
         <input type="text" name="supName" id="supName">
-        <button id="search" value="查询">查询</button>
+        <button id="search" value="查询"">查询</button>
         <div id="result"></div>
     </div>
 </div>

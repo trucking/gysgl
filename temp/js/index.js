@@ -4,29 +4,37 @@
 $(".title").click(function(){
     $(this).parent().siblings(".content").toggle();
 });
+
 $("#freezeSup").siblings(".content").hide();
+
 $("#exitSup").siblings(".content").hide();
+
 $("#result").hide();
+
 $("#search").click(function(){
     $supName = $("#supName").val();
     if($supName == ''){
         $("#result").text("程序员小李友情提示：输点东西上去吧，要不真什么也找不到。").show();
         return false;
     }else{
-
-        $url = 'searchSup.php';
-        $.ajax({
-           type:"POST",
-            url:$url,
-            dataType:"json",
-            data:{sup:$supName},
-            contentType: "application/x-www-form-urlencoded; charset=GB2312",
-            success: function(data){
-                alert(data);
-            }
-        });
+//        $url = 'searchSup.php';
+//        $.ajax({
+//           type:"POST",
+//            url:$url,
+//            dataType:"json",
+//            data:{sup:$supName},
+//            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+//            success: function(data){
+//                alert(data.test);
+//            },
+//            error:function(data){
+//                alert(data);
+//            }
+//        });
+        window.location.href("supplierResult.php?supName="+$supName);
     }
 });
+
 $("#supName").focus(function(){
     $("#result").hide();
 });
